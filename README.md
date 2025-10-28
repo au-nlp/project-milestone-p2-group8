@@ -1,5 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/hgNAtOO3)
-#Predicting Clinical Trial Success through Multimodal Data Fusion.
+## Predicting Clinical Trial Success through Multimodal Data Fusion.
 ## Abstract  
 Clinical trial failure is a major obstacle to medical progress, causing severe financial losses and delays in patients' access to novel treatments.
 This project aims to be a Multimodal Data Fusion to predict the success of clinical trials using the Clinical Trials dataset. Existing prediction models often lack context, analyzing unstructured material superficially or relying solely on structured metadata. The main innovation of our method is its **Multimodal Fusion Architecture**, which explicitly combines **deep semantic embeddings** from the eligibility criteria and summary text with the trial's **structured features** (such as sponsor and phase). This combination offers a comprehensive understanding of the scientific justification and trial mechanics. By outperforming a structured-data baseline model in terms of prediction, we demonstrate this benefit and provide insightful information that can be used to improve trial design in the future.
