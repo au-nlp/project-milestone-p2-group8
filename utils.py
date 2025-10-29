@@ -82,3 +82,70 @@ def fit_and_preprocess_train(train_df: pd.DataFrame):
     print("Training data preprocessed successfully according to the specific plan.")
     
     return processed_train_df, transformation_rules
+
+
+# preprocess function that preprocesses our testing data data and applies the transformation rules
+
+def transform_test_data(test_df: pd.DataFrame, rules: dict):
+    """
+    Applies the learned preprocessing rules to the raw test DataFrame.
+    
+    Args:
+        test_df: The raw testing pandas DataFrame.
+        rules: The dictionary of transformation rules learned from the training data.
+        
+    Returns:
+        A cleaned and preprocessed test DataFrame ready for evaluation.
+    """
+    data = test_df.copy()
+
+    # --- Step 1 & 2: Feature Selection and Target Creation ---
+    # (Same initial steps as the training function)
+    features_to_keep = [
+        'phases', 'study_type', 'enrollment_count', 'lead_sponsor_class', 
+        'sex', 'minimum_age', 'maximum_age', 'overall_status'
+    ]
+    data = data[features_to_keep]
+
+    success_stati = ["COMPLETED"]
+    failure_stati = ["TERMINATED", "WITHDRAWN", "SUSPENDED"]
+    data = data[data['overall_status'].isin(success_stati + failure_stati)].copy()
+    data['target'] = data['overall_status'].apply(lambda x: 1 if x in success_stati else 0)
+    data = data.drop(columns=['overall_status'])
+
+    # --- Step 3: Handle Missing Values using LEARNED Rules ---
+    # Drop rows first, mirroring the training process
+    data.dropna(subset=['sex', 'enrollment_count'], inplace=True)
+    
+    categorical_features = ['phases', 'study_type', 'lead_sponsor_class', 'sex']
+    numerical_features = ['enrollment_count', 'minimum_age', 'maximum_age']
+    
+    # Impute CATEGORICAL ('phases' only)
+    data['phases'] = data['phases'].fillna('Unknown')
+
+    # Impute NUMERICAL using the SAVED medians from the rules dictionary
+    for col in ['minimum_age', 'maximum_age']:
+        data[col] = data[col].fillna(rules['medians'][col])
+        
+    # Special fix for 'phases' if it's a list/ndarray
+    data['phases'] = data['phases'].apply(lambda d: d[0] if isinstance(d, (list, np.ndarray)) and len(d) > 0 else d if not isinstance(d, (list, np.ndarray)) else 'Unknown')
+
+    # --- Step 4: One-Hot Encode Categorical Features using LEARNED Encoder ---
+    # Retrieve the fitted encoder from the rules
+    encoder = rules['encoder']
+    encoded_cols = encoder.get_feature_names_out(categorical_features)
+    # APPLY the learned transformation
+    encoded_df = pd.DataFrame(encoder.transform(data[categorical_features]), columns=encoded_cols, index=data.index)
+
+    # --- Step 5: Scale Numerical Features using LEARNED Scaler ---
+    # Retrieve the fitted scaler from the rules
+    scaler = rules['scaler']
+    # APPLY the learned transformation
+    scaled_df = pd.DataFrame(scaler.transform(data[numerical_features]), columns=numerical_features, index=data.index)
+    
+    # Combine into the final processed DataFrame
+    processed_test_df = pd.concat([scaled_df, encoded_df, data['target']], axis=1)
+
+    print("Test data transformed successfully using training set rules.")
+    
+    return processed_test_df
