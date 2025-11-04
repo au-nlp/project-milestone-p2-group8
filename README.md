@@ -8,6 +8,7 @@ Our project fills a significant gap in the current literature on clinical trial
 1. **A Systematic Fusion of Data Types:** To offer a comprehensive and predictive view, we specifically combine **structured metadata** (such as phase, sponsor) with **unstructured textual data** (such as eligibility criteria).
 2. Analysis for Insight (EDA):** In addition to developing a predictor, we are **analyzing the data** (as demonstrated by our EDA findings) to shed light on *why* experiments are either successful or not.
 3. **A Clear Benchmarked Comparison:** We are contributing a clear, data-driven comparison of different modeling approaches—**structured-only vs. embeddings-only vs. our proposed final fused model**—to prove the value of our multimodal strategy.
+
 ## Methods
 --
 
