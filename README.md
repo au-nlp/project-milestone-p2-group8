@@ -6,7 +6,7 @@
 
 Clinical trial failure is a major obstacle to medical progress, resulting in significant financial losses and delays in patients' access to novel treatments.
 
-This project aims to be a Multimodal Data Fusion to predict the success of clinical trials using the Clinical Trials dataset. Existing prediction models often lack context, analyzing unstructured material superficially or relying solely on structured metadata. The main innovation of our method is its **Multimodal Fusion Architecture**, which explicitly combines **deep semantic embeddings** from the eligibility criteria and summary text with the trial's **structured features** (such as sponsor and phase). This combination offers a comprehensive understanding of the scientific justification and trial mechanics. By outperforming a structured-data baseline model in predictive performance, we demonstrate this benefit and provide insights that can be used to improve trial design in the future.
+Our project aims to use the Clinical Trials dataset to build a comprehensive classification model utilizing the strengths of both structured metadata, as well as semantic text embeddings in a combined multimodal data fusion, with the goal of predicting the success of clinical trials. Existing prediction models often lack context, analysing unstructured material superficially or relying solely on structured metadata. The main innovation of our method is its **Multimodal Fusion Architecture**, which explicitly combines **deep semantic embeddings** from the eligibility criteria and summary text with the trial's **structured features** (such as sponsor and phase). This combination offers a comprehensive understanding of the scientific justification and trial mechanics. By outperforming a structured-data baseline model in predictive performance, we demonstrate this benefit and provide insights that can be used to improve trial design in the future.
 
 ## Novelty  
 
@@ -58,8 +58,6 @@ To test our hypothesis that class imbalance was the primary issue, we conducted 
 
 ## Proposed Timeline
 
-Our team is focused on submitting the  P2 proposal by November 7th and following a structured timeline to ensure P3 is also successful.
-
 * **Phase 1 (Now until Nov 7): P2 Milestone Finalization**
     * Complete EDA and Baseline Model.
     * Finalize **README.md** (All sections, including Methods and Timeline).
@@ -75,11 +73,11 @@ Our team is focused on submitting the  P2 proposal by November 7th and following
 
 # Organization within the Team
 
-We have established clear roles to ensure accountability and a structured workflow. While we will all contribute across areas, these roles define the final responsibility for each deliverable:
+Even though roles are defined, group members all help each other where needed. 
 
-* **Project Coordinator (Anders):** Manages the GitHub repository (branches, commits), monitors deadlines, and ensures consistency between the final README and the Notebook. Responsible for creating .gitignore, requirements.txt and other needed files. 
-* **Lead Analyst / Coder (Esther):** Leads the data pipeline, completes the EDA, builds the **Baseline Model**, and develops the final **Multimodal Fusion Model**. Responsible for ensuring the `main.ipynb` runs smoothly. Is responsible for esnuring that discussions and explinations withiin the notebook are written and structured correctly. 
-* **Lead Writer / Researcher (Saznila):** Leads the writing of the **README.md**, performs the **Literature Review** (Novelty Statement), and is responsible for all **textual descriptions** and **analysis interpretations** within the README.
+* **Project Coordinator (Anders):** Manages the GitHub repository (branches, commits), monitors deadlines, and ensures consistency between the final README and the Notebook. Responsible for creating .gitignore, requirements.txt and other needed files. Makes sure that everything is structured correctly for hand ins.   
+* **Lead Analyst / Coder (Esther):** Leads the data pipeline, completes the EDA, builds the **Baseline Model**, and develops the final **Multimodal Fusion Model**. Responsible for ensuring the `main.ipynb` runs smoothly. Is responsible for ensuring that discussions and explanations within the notebook are written and structured correctly. 
+* **Lead Writer / Researcher (Saznila):** Leads the writing of the **README.md**, performs the **Literature Review** (Novelty Statement), and is responsible for all **textual descriptions** within the README.
 ---
 
 ## Appendix
