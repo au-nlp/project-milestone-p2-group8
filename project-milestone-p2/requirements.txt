@@ -1,0 +1,18 @@
+# Core data science libraries
+pandas
+numpy
+pyarrow
+
+# Library for loading the dataset from Hugging Face
+datasets
+
+# Scikit-learn (good to have for general data science)
+scikit-learn
+
+# NLP library and its backend for GPU processing
+sentence-transformers
+torch
+
+# Plotting libraries (harmless to keep for future analysis)
+matplotlib
+seaborn
