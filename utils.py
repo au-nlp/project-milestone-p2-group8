@@ -50,6 +50,11 @@ def fit_and_preprocess_train(train_df: pd.DataFrame):
     # We do this because the "NA" string itself is usually used in trials or studies where phases are not relevant.
     # So we want to be able to distinguish between studies where the phases value was missing vs where it was not relevant. 
     data['phases'] = data['phases'].fillna('Unknown')
+    
+    # We clip ages to reasonable human limits (e.g., 0 to 120 years)
+    # This prevents outliers from distorting the StandardScaler for the Fusion Model.
+    data['minimum_age'] = data['minimum_age'].clip(0, 120)
+    data['maximum_age'] = data['maximum_age'].clip(0, 120)
 
     # 3c: Impute NUMERICAL ('minimum_age' and 'maximum_age')
     transformation_rules = {'medians': {}}
@@ -123,6 +128,10 @@ def transform_test_data(test_df: pd.DataFrame, rules: dict):
     # Impute CATEGORICAL ('phases' only)
     data['phases'] = data['phases'].fillna('Unknown')
 
+    # NEW: Cap Age Outliers
+    data['minimum_age'] = data['minimum_age'].clip(0, 120)
+    data['maximum_age'] = data['maximum_age'].clip(0, 120)
+
     # Impute NUMERICAL using the SAVED medians from the rules dictionary
     for col in ['minimum_age', 'maximum_age']:
         data[col] = data[col].fillna(rules['medians'][col])
@@ -150,7 +159,14 @@ def transform_test_data(test_df: pd.DataFrame, rules: dict):
     
     return processed_test_df
 
-
+import pandas as pd
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import Dataset
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.utils import resample
 
 # dataset class for pytorch - we are taking our parqet and making sure it gets processed so that pytorch can read it
 

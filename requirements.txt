@@ -2,6 +2,7 @@
 pandas
 numpy
 pyarrow
+fastparquet
 
 # Library for loading the dataset from Hugging Face
 datasets
@@ -12,7 +13,16 @@ scikit-learn
 # NLP library and its backend for GPU processing
 sentence-transformers
 torch
+polars
+transformers
 
 # Plotting libraries (harmless to keep for future analysis)
 matplotlib
 seaborn
+
+
+
+
+
+
+
